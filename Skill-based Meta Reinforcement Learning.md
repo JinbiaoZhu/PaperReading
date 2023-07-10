@@ -114,7 +114,7 @@
 
 - 作者的研究目标：能够在复杂的、长期的任务上进行元学习，并可以以比以前的工作**少一个数量级的环境交互**来解决看不见的目标任务。(研究的flag不要立的太大hhhhhh)
 
-> <img src="C:\Users\aw\Desktop\元强化学习\paperReading\picturesInPaperReading\离线+元强化+技能提取和使用_1.png" style="zoom:7%;" />
+> ![sbmrl-pic-1](https://github.com/JinbiaoZhu/PaperReading/blob/main/pic/%E7%A6%BB%E7%BA%BF+%E5%85%83%E5%BC%BA%E5%8C%96+%E6%8A%80%E8%83%BD%E6%8F%90%E5%8F%96%E5%92%8C%E4%BD%BF%E7%94%A8_1.png?raw=true)
 >
 > 利用大量的离线数据集，其中包含在许多任务中收集的先前经验，没有奖励或任务注释；
 >
