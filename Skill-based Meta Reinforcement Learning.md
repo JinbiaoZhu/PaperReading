@@ -255,9 +255,9 @@ $$
 
 对标方法：PEARL。
 
-PEARL leverages the meta-training tasks for learning a task encoder $q(e|c)$. This encoder takes in a small set of state-action-reward transitions $c$ and produces a task embedding $e$. This embedding is used to condition the actor $π(a|s, z)$ and critic $Q(s, a, e)$.
+PEARL leverages the meta-training tasks for learning a task encoder $q(e|c)$ . This encoder takes in a small set of state-action-reward transitions $c$ and produces a task embedding $e$. This embedding is used to condition the actor $π(a|s, z)$ and critic $Q(s, a, e)$ .
 
-PEARL学习一个编码器  $q(e|c)$ 。采用”状态-动作-奖励“三个联动信息作为上下文 $c$ 来产生任务嵌入  $e$ 。任务嵌入 $e$ 被用来调节/控制策略的输入：$π(a|s, z)$ 以及状态动作对的评价 $Q(s, a, e)$ 。
+PEARL学习一个编码器  $q(e|c)$ 。采用”状态-动作-奖励“三个联动信息作为上下文 $c$ 来产生任务嵌入  $e$ 。任务嵌入 $e$ 被用来调节/控制策略的输入： $π(a|s, z)$ 以及状态动作对的评价 $Q(s, a, e)$ 。
 
 PEARL 的目标是：
 
@@ -533,7 +533,7 @@ While PEARL is first trained on the meta-training tasks, it still achieves poor 
 
 ### F.2 PEARL AND PEARL-FT
 
-PEARL 从元训练任务中学习，但不使用离线数据集。因此，我们直接在元训练任务上训练PEARL模型，而不需要从离线数据集中进行学习。我们使用从20个随机抽样的任务中平均梯度，其中每个任务梯度是通过从每个任务缓冲区中批量抽样计算得出的。目标熵设置为 $H = -dim(A)$，$α$初始化为0.1。
+PEARL 从元训练任务中学习，但不使用离线数据集。因此，我们直接在元训练任务上训练PEARL模型，而不需要从离线数据集中进行学习。我们使用从20个随机抽样的任务中平均梯度，其中每个任务梯度是通过从每个任务缓冲区中批量抽样计算得出的。目标熵设置为 $H = -dim(A)$， $α$ 初始化为0.1。
 
 虽然Rakelly等人（2019）提出的方法不会在目标/元测试任务上进行微调，但我们将PEARL扩展为在目标任务上进行微调，以进行公平比较，称为PEARL-ft。由于PEARL不使用学习到的技能或技能先验，因此PEARL的目标任务学习仅是使用编码任务的初始化运行SAC。与我们的方法的目标任务学习类似，我们将Q函数和熵系数α初始化为元训练阶段学习的值。此外，我们在从任务无条件策略回滚中观察20个经验剧集后，将策略初始化为任务条件策略。用于微调的超参数与SAC相同。
 
