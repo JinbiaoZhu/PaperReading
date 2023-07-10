@@ -213,9 +213,11 @@
 
    目的：用于元训练。
 
-   形式：$\mathbf{T}=\{T_{1},T_{2},\cdots,T_{n}\}$ ，集合内的每个任务实际都是一个MDP。
+   形式：集合内的每个任务实际都是一个MDP。
 
-3. 问题目标：
+   $$\mathbf{T}=\{T_{1},T_{2},\cdots,T_{n}\}$$
+
+4. 问题目标：
 
    > Our goal is to leverage both, the offline dataset $\mathbf{D}$ and the meta-training tasks $\mathbf{T}$, to accelerate the training of a policy $π(a|s)$ on a target task $\mathbf{T}^{\ast}$ which is also represented as an MDP.
 
@@ -244,6 +246,7 @@ SPiRL 使用任务无关的数据集来训练两个模型：
   在新任务上，不使用最本质地动作，而是使用”技能组合“来实现任务的完成。
 
 SPiRL 的目标是：
+
 $$
 \max\limits_{\pi}\sum\limits_{t}E_{(s_{t},a_{t})\sim\rho_{\pi}}[r(s_{t},z_{t})-\alpha D_{KL}(\pi(z|s_{t})|p(z|s_{t}))]
 $$
@@ -257,32 +260,34 @@ PEARL leverages the meta-training tasks for learning a task encoder $q(e|c)$. Th
 PEARL学习一个编码器  $q(e|c)$ 。采用”状态-动作-奖励“三个联动信息作为上下文 $c$ 来产生任务嵌入  $e$ 。任务嵌入 $e$ 被用来调节/控制策略的输入：$π(a|s, z)$ 以及状态动作对的评价 $Q(s, a, e)$ 。
 
 PEARL 的目标是：
+
 $$
 \max\limits_{\pi}E_{T\sim p_{t},e\sim q(\cdot|c^{T})}\big[\sum\limits_{t}E_{(s_{t},a_{t})\sim\rho_{\pi|e}}[r_{T}(s_{t},a_{t})+\alpha H(\pi(a|s_{t},e))]\big]
 $$
 
 ## 4 APPROACH
 
-> <img src="C:\Users\aw\Desktop\元强化学习\paperReading\picturesInPaperReading\离线+元强化+技能提取和使用_2.png" style="zoom:15%;" />
+> ![sbmrl-pic-2](https://github.com/JinbiaoZhu/PaperReading/blob/main/pic/%E7%A6%BB%E7%BA%BF+%E5%85%83%E5%BC%BA%E5%8C%96+%E6%8A%80%E8%83%BD%E6%8F%90%E5%8F%96%E5%92%8C%E4%BD%BF%E7%94%A8_2.png?raw=true)
 >
 > - **Skill Extraction**: learns reusable skills from snippets of task-agnostic offline data through a skill **extractor (yellow)** and **low-level skill policy (blue)**. Also trains a prior distribution over **skill embeddings (green)**. 
 > - **Skill-based Meta-training**: Meta-trains **a high-level skill policy (red)** and **task encoder (purple)** while using the pre-trained low-level policy. The pre-trained skill prior is used to <font color=red>regularize the high-level policy</font> during meta-training and guide exploration.
-> - **Target Task Learning**: Leverages the meta-trained hierarchical policy for quick learning of an unseen target task. After conditioning the policy by encoding a few transitions $c^{\ast}$ from the target task $T^{\ast}$, we continue fine-tuning the high-level skill policy on the target task while regularizing it with the pre-trained skill prior.
+> - **Target Task Learning**: Leverages the meta-trained hierarchical policy for quick learning of an unseen target task. After conditioning the policy by encoding a few transitions $c^{\ast}$ from the target task $T^{\ast}$ , we continue fine-tuning the high-level skill policy on the target task while regularizing it with the pre-trained skill prior.
 
 ---
 
 ### 4.1 SKILL EXTRACTION
 
 1. 训练技能编码器 $q(z|s_{0:K}, a_{0:K−1})$，将从数据集 $\mathbf{D}$ 中随机裁剪的 $K$ 步轨迹嵌入到低维技能嵌入 $z$ 中。
-2. 低层技能策略 $π(a_{t}|s_{t}, z)$，通过行为克隆进行训练，以在给定技能嵌入的情况下重现动作序列 $a_{0:K−1}$。
+2. 低层技能策略 $π(a_{t}|s_{t}, z)$ ，通过行为克隆进行训练，以在给定技能嵌入的情况下重现动作序列 $a_{0:K−1}$ 。
 3. 使用单位高斯分布对技能编码器的输出进行正则化，并通过系数 $β$ 对此正则化进行加权。
-4. 学习一个技能先验 $p(z|s)$，该先验捕捉在训练数据分布下可能在给定状态下执行的技能分布。
+4. 学习一个技能先验 $p(z|s)$ ，该先验捕捉在训练数据分布下可能在给定状态下执行的技能分布。
 
 技能抽取过程的目标：
 
-<img src="C:\Users\aw\Desktop\元强化学习\paperReading\picturesInPaperReading\离线+元强化+技能提取和使用_3.png" style="zoom:60%;" />
+![sbmrl-pic-3](https://github.com/JinbiaoZhu/PaperReading/blob/main/pic/%E7%A6%BB%E7%BA%BF+%E5%85%83%E5%BC%BA%E5%8C%96+%E6%8A%80%E8%83%BD%E6%8F%90%E5%8F%96%E5%92%8C%E4%BD%BF%E7%94%A8_3.png?raw=true)
 
 > 实际上，对这个 $\pi(a|s,z)$ 做一些推导可以知道为什么作者要训练这些”组件“。
+> 
 > $$
 > \begin{align}
 > \pi(a|s,z) =& \frac{p(a,s,z)}{p(s,z)} \text{（条件概率公式拆开）} \\
@@ -290,13 +295,17 @@ $$
 > =& p(a|s)\frac{p(z|s,a)}{p(z|s)} \text{（把分子分母的第二项合并起来）}
 > \end{align}
 > $$
-> 也就是说，得到 $\pi(a|s,z)$ 策略，需要（1）$p(a|s)$ 离线数据集生成的策略，这个当作已知的，可以通过行为克隆获得；（2）$p(z|s,a)$ 根据离线数据集抽取的”技能“，也就是技能抽取器；（3）$p(z|s)$ ，在当前状态下可能采用何种”技能“的概率，也就是先验分布。
+> 
+> 
+> 也就是说，得到 $\pi(a|s,z)$ 策略，需要（1） $p(a|s)$ 离线数据集生成的策略，这个当作已知的，可以通过行为克隆获得；（2） $p(z|s,a)$ 根据离线数据集抽取的”技能“，也就是技能抽取器；（3） $p(z|s)$ ，在当前状态下可能采用何种”技能“的概率，也就是先验分布。
+> 
 > $$
 > \begin{align}
 > \max\pi(a|s,z)	&=	\max{p(a|s)\frac{p(z|s,a)}{p(z|s)}} \\
 > 				&=	p(a|s)\frac{\max p(z|s,a)}{\min p(z|s)}
 > \end{align}
 > $$
+> 
 > 可见，分子的最大化对应于目标的第一项；分母的最小化对应于目标的第二项。
 
 ---
@@ -307,15 +316,15 @@ $$
 
 1. 训练任务编码器。收集一些状态转移的样本，生成任务嵌入向量 $e$ 。
 
-2. 通过训练任务嵌入 $e$ 的条件策略，利用我们的技能，而不是原始行动：$π(z|s,e)$。从而用一组有用的预训练”技能“装备，并减少元训练任务，让元训练学习如何结合这些行为而不是从头学习。
+2. 通过训练任务嵌入 $e$ 的条件策略，利用我们的技能，而不是原始行动： $π(z|s,e)$ 。从而用一组有用的预训练”技能“装备，并减少元训练任务，让元训练学习如何结合这些行为而不是从头学习。
 
 3. 元训练阶段的目标：
 
-   <img src="C:\Users\aw\Desktop\元强化学习\paperReading\picturesInPaperReading\离线+元强化+技能提取和使用_4.png" style="zoom:60%;" />
+   ![sbmrl-pic-4](https://github.com/JinbiaoZhu/PaperReading/blob/main/pic/%E7%A6%BB%E7%BA%BF+%E5%85%83%E5%BC%BA%E5%8C%96+%E6%8A%80%E8%83%BD%E6%8F%90%E5%8F%96%E5%92%8C%E4%BD%BF%E7%94%A8_4.png?raw=true)
 
    我们通过在策略和先验之间选择一个目标散度 $δ$，通过双梯度下降自动调优 $α$ 。
 
-4. 我们使用了多种不同大小的 $c$。通过调整先验正则化的强度到条件集的大小来增加训练的稳定性。
+4. 我们使用了多种不同大小的 $c$ 。通过调整先验正则化的强度到条件集的大小来增加训练的稳定性。
 
    > When the set $c$ is small, it has only little information about the task at hand and should thus be regularized stronger towards the task-agnostic skill prior.
 
@@ -327,7 +336,7 @@ $$
 
 > Intuitively, the policy should fifirst explore different skill options to learn about the task at hand and then rapidly narrow its output distribution to those skills that solve the task.
 
-1. We explore the environment by conditioning our pre-trained policy with task embeddings sampled from the task prior $p(e)$.
+1. We explore the environment by conditioning our pre-trained policy with task embeddings sampled from the task prior $p(e)$ .
 
    作者首先解决了探索任务：预训练策略 + 从任务先验 $p(e)$ 采样得到的任务嵌入，来探索
 
@@ -343,7 +352,7 @@ $$
 
 作者在此处提到了他们的研究成果：only very few interactions，就能实现目标域上的快速泛化适应。
 
-<img src="C:\Users\aw\Desktop\元强化学习\paperReading\picturesInPaperReading\离线+元强化+技能提取和使用_5.png" style="zoom:60%;" />
+![sbmrl-pic-5](https://github.com/JinbiaoZhu/PaperReading/blob/main/pic/%E7%A6%BB%E7%BA%BF+%E5%85%83%E5%BC%BA%E5%8C%96+%E6%8A%80%E8%83%BD%E6%8F%90%E5%8F%96%E5%92%8C%E4%BD%BF%E7%94%A8_5.png?raw=true)
 
 ## 5 EXPERIMENTS
 
@@ -354,7 +363,7 @@ $$
 
 ### 5.1 EXPERIMENTAL SETUP
 
-> <img src="C:\Users\aw\Desktop\元强化学习\paperReading\picturesInPaperReading\离线+元强化+技能提取和使用_6.png" style="zoom:50%;" />
+> ![sbmrl-pic-6](https://github.com/JinbiaoZhu/PaperReading/blob/main/pic/%E7%A6%BB%E7%BA%BF+%E5%85%83%E5%BC%BA%E5%8C%96+%E6%8A%80%E8%83%BD%E6%8F%90%E5%8F%96%E5%92%8C%E4%BD%BF%E7%94%A8_6.png?raw=true)
 >
 > 1. 智能体需要导航数百步才能到达未见过的目标，并且只有在任务成功时才会获得二进制奖励。
 > 2. 7自由度智能体需要执行四个子任务的一个看不见的序列，跨越数百个时间步长，并且只有在完成每个子任务时才能获得稀疏的奖励。
@@ -389,9 +398,9 @@ While PEARL is first trained on the meta-training tasks, it still achieves poor 
 >
 > <font color=blue size=2>我感觉这个因果关系不是很明显，没有解释到PEARL的底层里面。</font>
 
-> <img src="C:\Users\aw\Desktop\元强化学习\paperReading\picturesInPaperReading\离线+元强化+技能提取和使用_7.png" style="zoom:50%;" />
+> ![sbmrl-pic-7](https://github.com/JinbiaoZhu/PaperReading/blob/main/pic/%E7%A6%BB%E7%BA%BF+%E5%85%83%E5%BC%BA%E5%8C%96+%E6%8A%80%E8%83%BD%E6%8F%90%E5%8F%96%E5%92%8C%E4%BD%BF%E7%94%A8_7.png?raw=true)
 
-> <img src="C:\Users\aw\Desktop\元强化学习\paperReading\picturesInPaperReading\离线+元强化+技能提取和使用_8.png" style="zoom:50%;" />
+> ![sbmrl-pic-8](https://github.com/JinbiaoZhu/PaperReading/blob/main/pic/%E7%A6%BB%E7%BA%BF+%E5%85%83%E5%BC%BA%E5%8C%96+%E6%8A%80%E8%83%BD%E6%8F%90%E5%8F%96%E5%92%8C%E4%BD%BF%E7%94%A8_8.png?raw=true)
 
 ### 5.4 META-TRAINING TASK DISTRIBUTION ANALYSIS
 
@@ -426,7 +435,7 @@ While PEARL is first trained on the meta-training tasks, it still achieves poor 
 >
 >    作者给出的理由是：没有学到有偏差的训练任务。
 
-> <img src="C:\Users\aw\Desktop\元强化学习\paperReading\picturesInPaperReading\离线+元强化+技能提取和使用_9.png" style="zoom:50%;" />
+> ![sbmrl-pic-9](https://github.com/JinbiaoZhu/PaperReading/blob/main/pic/%E7%A6%BB%E7%BA%BF+%E5%85%83%E5%BC%BA%E5%8C%96+%E6%8A%80%E8%83%BD%E6%8F%90%E5%8F%96%E5%92%8C%E4%BD%BF%E7%94%A8_9.png?raw=true)
 
 ## 6 CONCLUSION
 
@@ -450,7 +459,7 @@ While PEARL is first trained on the meta-training tasks, it still achieves poor 
 2. short-range goals with larger variance TTRAIN-MEDIUM.
 3. long-range goals with large variance TTRAIN-HARD, which we used in our original maze experiments.
 
-> <img src="C:\Users\aw\Desktop\元强化学习\paperReading\picturesInPaperReading\离线+元强化+技能提取和使用_10.png" style="zoom:50%;" />
+> ![sbmrl-pic-10](https://github.com/JinbiaoZhu/PaperReading/blob/main/pic/%E7%A6%BB%E7%BA%BF+%E5%85%83%E5%BC%BA%E5%8C%96+%E6%8A%80%E8%83%BD%E6%8F%90%E5%8F%96%E5%92%8C%E4%BD%BF%E7%94%A8_10.png?raw=true)
 
 ---
 
@@ -464,15 +473,15 @@ While PEARL is first trained on the meta-training tasks, it still achieves poor 
 2. 在中等难度任务中，作者的模型和 BC+PEARL 效果差不多。
 3. 在最高难度任务中，只有作者的模型涨点起来了。
 
-> <img src="C:\Users\aw\Desktop\元强化学习\paperReading\picturesInPaperReading\离线+元强化+技能提取和使用_11.png" style="zoom:50%;" />
+> ![sbmrl-pic-11](https://github.com/JinbiaoZhu/PaperReading/blob/main/pic/%E7%A6%BB%E7%BA%BF+%E5%85%83%E5%BC%BA%E5%8C%96+%E6%8A%80%E8%83%BD%E6%8F%90%E5%8F%96%E5%92%8C%E4%BD%BF%E7%94%A8_11.png?raw=true)
 
 ### LEARNING EFFICIENCY ON TARGET TASKS WITH FEW EPISODES OF EXPERIENCE
 
-> <img src="C:\Users\aw\Desktop\元强化学习\paperReading\picturesInPaperReading\离线+元强化+技能提取和使用_12.png" style="zoom:50%;" />
+> ![sbmrl-pic-12](https://github.com/JinbiaoZhu/PaperReading/blob/main/pic/%E7%A6%BB%E7%BA%BF+%E5%85%83%E5%BC%BA%E5%8C%96+%E6%8A%80%E8%83%BD%E6%8F%90%E5%8F%96%E5%92%8C%E4%BD%BF%E7%94%A8_12.png?raw=true)
 >
 > <font color=blue size=2>还是保留我的观点，在迷宫环境，共享信息太容易获得，数据肯定有效。</font>
 
-> <img src="C:\Users\aw\Desktop\元强化学习\paperReading\picturesInPaperReading\离线+元强化+技能提取和使用_13.png" style="zoom:50%;" />
+> ![sbmrl-pic-13](https://github.com/JinbiaoZhu/PaperReading/blob/main/pic/%E7%A6%BB%E7%BA%BF+%E5%85%83%E5%BC%BA%E5%8C%96+%E6%8A%80%E8%83%BD%E6%8F%90%E5%8F%96%E5%92%8C%E4%BD%BF%E7%94%A8_13.png?raw=true)
 >
 > <font color=blue size=2>直观上：1. 作者提出的方法和其他方法没有使用同样的平滑方法；2. 右边的Chicken Manipulation的方差未免也太大了吧......</font>
 
@@ -494,7 +503,7 @@ While PEARL is first trained on the meta-training tasks, it still achieves poor 
 
   这表明我们的方法可以扩展到基于图像的输入，并且对于离线预训练数据和目标任务之间的实质性领域转移具有鲁棒性。
 
-> <img src="C:\Users\aw\Desktop\元强化学习\paperReading\picturesInPaperReading\离线+元强化+技能提取和使用_14.png" style="zoom:50%;" />
+> ![sbmrl-pic-4](https://github.com/JinbiaoZhu/PaperReading/blob/main/pic/%E7%A6%BB%E7%BA%BF+%E5%85%83%E5%BC%BA%E5%8C%96+%E6%8A%80%E8%83%BD%E6%8F%90%E5%8F%96%E5%92%8C%E4%BD%BF%E7%94%A8_14.png?raw=true)
 
 ### D EXTENDED RELATED WORK
 
