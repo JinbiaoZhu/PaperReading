@@ -1,7 +1,5 @@
 # 【论文笔记】Skill-based Meta Reinforcement Learning
 
-[TOC]
-
 ## Abstract
 
 1. 研究背景。
@@ -114,7 +112,7 @@
 
 - 作者的研究思路：结合元强化学习的学习能力获得和离线强化学习的学习无标注任务离线数据集的能力。
 
-- 作者的研究目标：能够在复杂的、长期的任务上进行元学习，并可以以比以前的工作**少一个数量级的环境交互**来解决看不见的目标任务。(<font color=blue size=2>研究的flag不要立的太大hhhhhh</font>)
+- 作者的研究目标：能够在复杂的、长期的任务上进行元学习，并可以以比以前的工作**少一个数量级的环境交互**来解决看不见的目标任务。(研究的flag不要立的太大hhhhhh)
 
 > <img src="C:\Users\aw\Desktop\元强化学习\paperReading\picturesInPaperReading\离线+元强化+技能提取和使用_1.png" style="zoom:7%;" />
 >
