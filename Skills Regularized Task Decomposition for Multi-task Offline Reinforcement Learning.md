@@ -175,7 +175,7 @@ $$
 
 ![技能正则化+离线3](https://github.com/JinbiaoZhu/PaperReading/blob/main/pic/%E6%8A%80%E8%83%BD%E6%AD%A3%E5%88%99%E5%8C%96_%E5%A4%9A%E4%BB%BB%E5%8A%A1%E7%A6%BB%E7%BA%BF_3.png?raw=true)
 
-$\{\hat{b_{i}}\}_{i=1}^{m}\sim P_{B}$ 是从一个技能嵌入分布的先验中采样得到；$\lambda >0$ 是基于先验分布的正则化超参数；
+$\{ \hat{b_{i}} \},i=1\cdots m \sim P_{B}$ 是从一个技能嵌入分布的先验中采样得到； $\lambda >0$ 是基于先验分布的正则化超参数；
 
 $L_{PR}$ 用来限制技能嵌入。
 
