@@ -1,4 +1,7 @@
 # PaperReading
+
+![ACuteCat](https://github.com/JinbiaoZhu/PaperReading/blob/main/pic/4301b348e0c44c7f96d6d7fb3d1e7730.gif?raw=true)
+
 This is a Github repository that focuses on articles related to skill-based meta reinforcement learning. The main focus is on skill extraction, combination, and generalization.
 
  1. 😊[2023.07.05]😊  Nam, Taewook, et al. "Skill-based meta-reinforcement learning." arXiv preprint arXiv:2204.11828 (2022).
