@@ -7,3 +7,4 @@ This is a Github repository that focuses on articles related to skill-based meta
  1. 😊[2023.07.05]😊  Nam, Taewook, et al. "Skill-based meta-reinforcement learning." arXiv preprint arXiv:2204.11828 (2022).
  2. 😊[2023.07.11]😊  Yoo, Minjong, Sangwoo Cho, and Honguk Woo. "Skills Regularized Task Decomposition for Multi-task Offline Reinforcement Learning." Advances in Neural Information Processing Systems 35 (2022): 37432-37444.
  3. 😊[2023.07.12]😊  Cheng, Shuo, and Danfei Xu. "Guided Skill Learning and Abstraction for Long-Horizon Manipulation." arXiv preprint arXiv:2210.12631 (2022).
+ 4. 😊[2023.07.14]😊  Guan, Lin, et al. "Leveraging Pre-trained Large Language Models to Construct and Utilize World Models for Model-based Task Planning." arXiv preprint arXiv:2305.14909 (2023).
