@@ -1,6 +1,8 @@
 # PaperReading
 
-![ACuteCat](https://github.com/JinbiaoZhu/PaperReading/blob/main/pic/4301b348e0c44c7f96d6d7fb3d1e7730.gif?raw=true)
+<div align=center>
+  <image src="https://github.com/JinbiaoZhu/PaperReading/blob/main/pic/4301b348e0c44c7f96d6d7fb3d1e7730.gif?raw=true">
+</div>
 
 This is a Github repository that focuses on articles related to skill-based meta reinforcement learning. The main focus is on skill extraction, combination, and generalization.
 
