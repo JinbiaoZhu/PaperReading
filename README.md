@@ -11,3 +11,4 @@ This is a Github repository that focuses on articles related to skill-based meta
  3. 😊[2023.07.12]😊  Cheng, Shuo, and Danfei Xu. "Guided Skill Learning and Abstraction for Long-Horizon Manipulation." arXiv preprint arXiv:2210.12631 (2022).
  4. 😊[2023.07.14]😊  Guan, Lin, et al. "Leveraging Pre-trained Large Language Models to Construct and Utilize World Models for Model-based Task Planning." arXiv preprint arXiv:2305.14909 (2023).
  5. 😊[2023.07.16]😊  Chen, Yongchao, et al. "AutoTAMP: Autoregressive Task and Motion Planning with LLMs as Translators and Checkers." arXiv preprint arXiv:2306.06531 (2023).
+ 6. 😊[2023.07.21]😊  Myself. "RL-and-Variational-Inference-v2.pdf"
