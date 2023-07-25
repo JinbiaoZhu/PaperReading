@@ -7,6 +7,7 @@
 首先对公式 $(20)$ 做推导。
 
 公式 $(20)$ 的数据流应该是这样的：
+
 $$
 \mathbf{s}\rightarrow \pi(\mathbf{u}|\mathbf{s}) \rightarrow \mathbf{u}\rightarrow \mathbf{a}=\tanh(\mathbf{u})\rightarrow \mathbf{a}
 $$
@@ -42,7 +43,9 @@ p(A) &= \frac{\mathbf{d}Pr_{A}(\mathbf{a})}{\mathbf{d}\mathbf{a}} \\
      &= \mu(\mathbf{u}|\mathbf{s})\cdot \big|\det\frac{\mathbf{d}\mathbf{a}}{\mathbf{d}\mathbf{u}}\big|^{-1} \\
 \end{align*}\tag{2}
 $$
+
 我们得到了论文的公式 $(20)$ ，但是后面导数的对角阵的逆还需要进一步处理。
+
 $$
 \begin{align*}
 y&=\tanh(x)=\frac{\sinh(x)}{\cosh(x)}\tag{3} \\
@@ -51,7 +54,9 @@ y^{\prime}&=\frac{\cosh^{2}(x)-\sinh^{2}(x)}{\cosh^{2}(x)} \\
 &其中，[\cosh(x)]^{\prime}=\sinh(x)，[\sinh(x)]^{\prime}=\cosh(x)
 \end{align*}
 $$
+
 得到了这样一个等式之后，我们可以把这个等式用到向量之间：
+
 $$
 \begin{align*}
 &\ \ \ \ \big|\det\frac{\mathbf{d}\mathbf{a}}{\mathbf{d}\mathbf{u}}\big|^{-1} \\
@@ -68,7 +73,9 @@ $$
 &=\frac{1}{( 1-\tanh^{2}(u_{1}))\cdots(1-\tanh^{2}(u_{n}))}
 \end{align*}\tag{5}
 $$
+
 最后计算对数概率密度：
+
 $$
 \begin{align*}
 \log\pi(\mathbf{a}|\mathbf{s}) &= \log\mu(\mathbf{u}|\mathbf{s})+\log\frac{1}{( 1-\tanh^{2}(u_{1}))\cdots(1-\tanh^{2}(u_{n}))} \\
@@ -79,6 +86,7 @@ $$
 &\ (化简一下) \\
 \end{align*}\tag{6}
 $$
+
 最后我想说的是：
 
 1. 这就是为什么在SAC的策略更新代码中，计算重采样之后的概率密度，还要再加上一串很奇怪的项。
