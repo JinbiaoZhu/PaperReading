@@ -1,7 +1,5 @@
 # 【论文笔记】Language Models as Zero-Shot Planners: Extracting Actionable Knowledge for Embodied Agents
 
-[TOC]
-
 
 
 ## Abstract
@@ -79,13 +77,18 @@
 2. 使用该模型通过将已**通过上述技术**使其**可接受的先前行动作为条件**，**自回归地生成**计划中的行动。
 
    How to make the LLM generate better plans?
+   
    $$
-   A_{t+1} = f_{casual}(s_{t},a_{t},\cdots,a_{1}) \\
+   A_{t+1} = f_{casual}(s_{t},a_{t},\cdots,a_{1})
+   $$
+   
+   $$
    a_{t+1} = f_{mask}(A_{t+1})
    $$
+   
    通过向**模型提示**与**查询任务类似的**已知任务示例，向模型提供**弱监督**。
 
-3. 对多种技术和模型进行人工评估。
+4. 对多种技术和模型进行人工评估。
 
 ---
 
@@ -110,8 +113,9 @@
 如何让输出的计划更好？ —— 为每个询问事件生成多个输出，仅考虑每个任务允许评估一个输出样本的情况，这是因为 *重复的试错等价于探索环境以获取特权信息* ，这在我们的设置中不应被视为可行的。
 
 对于 `Vanilla LLMs` ，为了从 $k$ 个样本 $(X_1,X_2,\cdots,X_k)$ 中选择最佳行动计划 $X^{\ast}$，每个样本由 $n_i$ 个tokens组成，选择**平均对数概率最高**的样本。
+
 $$
-\arg\max\limits_{X_{i}}P_{\theta}(X_{i})=\frac{1}{n_{i}}\sum\limits_{j=1}^{n_{i}}\log p_{\theta}(x_{i,j}|x_{i,<j})
+\arg\max_{X_{i}}  P_{\theta}  (X_{i}) = \frac{1}{n_{i}} \sum_{j=1}^{n_{i}}  \log  p_{\theta}(x_{i,j}|x_{i,\lt j})
 $$
 
 ### Admissible Action Parsing by Semantic Translation
@@ -125,9 +129,11 @@ $$
 再次利用语言模型学习的世界知识来翻译语义化动作。
 
 对于每个可接受的环境动作 $a_e$ ，通过**余弦相似度**计算它与**预测的动作短语** $\hat{a}$ 之间的**语义距离**。
+
 $$
 C(f(\hat{a}), f(a_e)) := \frac{f(\hat{a})\cdot f(a_e)}{||f(\hat{a})||\cdot ||f(a_e)||}
 $$
+
 其中， $f$ 表示词嵌入。使用一个以 `Sentence-BERT` 为目标预训练的BERT风格语言模型，将其称为 `Translation LLMs` 。
 
 ###  Autoregressive Trajectory Correction
@@ -135,18 +141,27 @@ $$
 LLMs可能会为**单个步骤**输出**复合指令**，即使在环境中不能使用一个可接受的动作完成。
 
 可以交替生成计划和翻译动作，以允许自动轨迹校正。
+
 $$
 A_{t+1} = f_{casual}(s_{t},a_{t},\cdots,a_{1}) \\
 a_{t+1} = f_{mask}(A_{t+1})
 $$
+
 在每个步骤中，首先询问 `Planning LM` 来为单个动作生成 $k$ 个样本 $(\hat{a}_1, \hat{a}_2, \cdots, \hat{a}_k)$ 。对于每个样本 $\hat{a}$ ，考虑其**语义合理性**以及在环境中的**可实现性**。具体而言，旨在通过修改排名方案来找到可接受的环境动作 $a_e$ 。
+
 $$
 \arg\max\limits_{a_e}\big[\max\limits_{\hat{a}}C(f(\hat{a}), f(a_e)) + \beta· P_{\theta}(\hat{a})\big]
 $$
 
 > 先找到LLMs输出的与实际语义最接近的计划动作 $\hat{a}$ ，然后找到这个计划动作 $\hat{a}$ 最接近的动作语义 $a_{e}$ 。
 
-可以使用 `Translation LLMs` 来检测超出分布的动作，即机器人能力范围之外的动作，并及早终止程序，而不是映射到错误的动作。终止的条件是： $\max\limits_{\hat{a}}C(f(\hat{a}), f(a_e)) + \beta· P_{\theta}(\hat{a})<t$ 和 $50\%$ 当前的采样终止了。
+可以使用 `Translation LLMs` 来检测超出分布的动作，即机器人能力范围之外的动作，并及早终止程序，而不是映射到错误的动作。终止的条件是： 
+
+$$
+\max\limits_{\hat{a}}C(f(\hat{a}), f(a_e)) + \beta· P_{\theta}(\hat{a})\lt t
+$$ 
+
+和百分之 $50$ 当前的采样终止了。
 
 ### Dynamic Example Selection for Improved Knowledge Extraction
 
