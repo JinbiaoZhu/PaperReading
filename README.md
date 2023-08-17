@@ -15,3 +15,4 @@ This is a Github repository that focuses on articles related to skill-based meta
  7. 😊[2023.07.26]😊  Myself. "SAC_logprob.md"
  8. 😊[2023.08.16]😊  Huang, Wenlong, et al. "Language models as zero-shot planners: Extracting actionable knowledge for embodied agents." International Conference on Machine Learning. PMLR, 2022.
  9. 😊[2023.08.17]😊  Ding, Yan, et al. "Task and motion planning with large language models for object rearrangement." arXiv preprint arXiv:2303.06247 (2023).
+ 10. 😊[2023.08.17]😊  Cao, Yue, and C. S. Lee. "Ground Manipulator Primitive Tasks to Executable Actions using Large Language Models." arXiv preprint arXiv:2308.06810 (2023).
