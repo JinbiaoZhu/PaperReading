@@ -14,3 +14,4 @@ This is a Github repository that focuses on articles related to skill-based meta
  6. 😊[2023.07.21]😊  Myself. "RL-and-Variational-Inference-v2.pdf"
  7. 😊[2023.07.26]😊  Myself. "SAC_logprob.md"
  8. 😊[2023.08.16]😊  Huang, Wenlong, et al. "Language models as zero-shot planners: Extracting actionable knowledge for embodied agents." International Conference on Machine Learning. PMLR, 2022.
+ 9. 😊[2023.08.17]😊  Ding, Yan, et al. "Task and motion planning with large language models for object rearrangement." arXiv preprint arXiv:2303.06247 (2023).
