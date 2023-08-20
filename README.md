@@ -13,6 +13,12 @@ This is a Github repository that focuses on articles related to skill-based meta
  5. 😊[2023.07.16]😊  Chen, Yongchao, et al. "AutoTAMP: Autoregressive Task and Motion Planning with LLMs as Translators and Checkers." arXiv preprint arXiv:2306.06531 (2023).
  6. 😊[2023.07.21]😊  Myself. "RL-and-Variational-Inference-v2.pdf"
  7. 😊[2023.07.26]😊  Myself. "SAC_logprob.md"
- 8. 😊[2023.08.16]😊  Huang, Wenlong, et al. "Language models as zero-shot planners: Extracting actionable knowledge for embodied agents." International Conference on Machine Learning. PMLR, 2022.
- 9. 😊[2023.08.17]😊  Ding, Yan, et al. "Task and motion planning with large language models for object rearrangement." arXiv preprint arXiv:2303.06247 (2023).
- 10. 😊[2023.08.17]😊  Cao, Yue, and C. S. Lee. "Ground Manipulator Primitive Tasks to Executable Actions using Large Language Models." arXiv preprint arXiv:2308.06810 (2023).
+
+---
+
+ 1. 🥰[2023.08.16]🥰  Huang, Wenlong, et al. "Language models as zero-shot planners: Extracting actionable knowledge for embodied agents." International Conference on Machine Learning. PMLR, 2022.
+ 2. 🥰[2023.08.17]🥰  Ding, Yan, et al. "Task and motion planning with large language models for object rearrangement." arXiv preprint arXiv:2303.06247 (2023).
+ 3. 🥰[2023.08.17]🥰  Cao, Yue, and C. S. Lee. "Ground Manipulator Primitive Tasks to Executable Actions using Large Language Models." arXiv preprint arXiv:2308.06810 (2023).
+ 4. 🥰[2023.08.18]🥰  Ding, Yan, et al. "Robot task planning and situation handling in open worlds." arXiv preprint arXiv:2210.01287 (2022).
+ 5. 🥰[2023.08.18]🥰  Perez, Julien, et al. "LARG, Language-based Automatic Reward and Goal Generation." arXiv preprint arXiv:2306.10985 (2023).
+ 6. 🥰[2023.08.18]🥰  Colas, Cédric, et al. "Language-conditioned goal generation: a new approach to language grounding for RL." arXiv preprint arXiv:2006.07043 (2020).
