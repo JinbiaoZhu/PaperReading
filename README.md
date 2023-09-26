@@ -23,3 +23,8 @@ This is a Github repository that focuses on articles related to skill-based meta
  5. 🥰[2023.08.18]🥰  Perez, Julien, et al. "LARG, Language-based Automatic Reward and Goal Generation." arXiv preprint arXiv:2306.10985 (2023).
  6. 🥰[2023.08.18]🥰  Colas, Cédric, et al. "Language-conditioned goal generation: a new approach to language grounding for RL." arXiv preprint arXiv:2006.07043 (2020).
  7. 🥰[2023.08.21]🥰  Eysenbach, Benjamin, et al. "Diversity is all you need: Learning skills without a reward function." arXiv preprint arXiv:1802.06070 (2018).
+
+---
+
+ 1. 😘[2023.09.25]😘 Vemprala, Sai, et al. "Chatgpt for robotics: Design principles and model abilities." Microsoft Auton. Syst. Robot. Res 2 (2023): 20.
+ 2. 😘[2023.09.26]😘 Liu, Haokun, et al. "LLM-Based Human-Robot Collaboration Framework for Manipulation Tasks." arXiv preprint arXiv:2308.14972 (2023).
