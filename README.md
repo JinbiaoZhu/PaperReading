@@ -28,3 +28,9 @@ This is a Github repository that focuses on articles related to skill-based meta
 
  1. 😘[2023.09.25]😘 Vemprala, Sai, et al. "Chatgpt for robotics: Design principles and model abilities." Microsoft Auton. Syst. Robot. Res 2 (2023): 20.
  2. 😘[2023.09.26]😘 Liu, Haokun, et al. "LLM-Based Human-Robot Collaboration Framework for Manipulation Tasks." arXiv preprint arXiv:2308.14972 (2023).
+
+---
+
+ 1. 🤗[2023.10.02]🤗 Elhafsi, A., Sinha, R., Agia, C., Schmerling, E., Nesnas, I., and Pavone, M., “Semantic Anomaly Detection with Large Language Models”, <i>arXiv e-prints</i>, 2023. doi:10.48550/arXiv.2305.11307.
+ 2. 🤗[2023.10.06]🤗 Liang, J., “Code as Policies: Language Model Programs for Embodied Control”, <i>arXiv e-prints</i>, 2022. doi:10.48550/arXiv.2209.07753.
+
