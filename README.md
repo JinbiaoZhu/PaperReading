@@ -34,4 +34,5 @@ This is a Github repository that focuses on articles related to skill-based meta
  1. 🤗[2023.10.02]🤗 Elhafsi, A., Sinha, R., Agia, C., Schmerling, E., Nesnas, I., and Pavone, M., “Semantic Anomaly Detection with Large Language Models”, <i>arXiv e-prints</i>, 2023. doi:10.48550/arXiv.2305.11307.
  2. 🤗[2023.10.06]🤗 Liang, J., “Code as Policies: Language Model Programs for Embodied Control”, <i>arXiv e-prints</i>, 2022. doi:10.48550/arXiv.2209.07753.
  3. 🤗[2023.10.09]🤗 Jin, E., “Mini-BEHAVIOR: A Procedurally Generated Benchmark for Long-horizon Decision-Making in Embodied AI”, <i>arXiv e-prints</i>, 2023. doi:10.48550/arXiv.2310.01824.
+ 4. 🤗[2023.10.15]🤗 Zhou, Haoyu, et al. "Generalizable Long-Horizon Manipulations with Large Language Models." arXiv preprint arXiv:2310.02264 (2023).
 
